@@ -1,12 +1,11 @@
-package com.example.recipeapp;
+package com.example.recipeapp.activities;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.recipeapp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     FirebaseFirestore db;
 
@@ -16,5 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = FirebaseFirestore.getInstance();
+
+        showProgressDialog();
+
+        hideProgressDialog();
     }
 }
