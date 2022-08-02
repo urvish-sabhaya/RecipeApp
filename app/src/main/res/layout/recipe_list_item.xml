@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    app:cardBackgroundColor="@color/colorPrimaryDark"
+    app:cardCornerRadius="@dimen/_7sdp"
+    app:cardElevation="@dimen/_4sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_recipe_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_155sdp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius_top_left="@dimen/_7sdp"
+            app:riv_corner_radius_top_right="@dimen/_7sdp"
+            tools:src="@drawable/food_test" />
+
+        <TextView
+            android:id="@+id/recipe_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#8B000000"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/img_recipe_image"
+            app:layout_constraintEnd_toEndOf="@id/img_recipe_image"
+            tools:text="50 min." />
+
+        <TextView
+            android:id="@+id/txt_recipe_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_recipe_image"
+            tools:text="Roasted vegetable cousin" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_user_image"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_recipe_name"
+            app:riv_corner_radius="@dimen/_3sdp"
+            tools:src="@drawable/food_test" />
+
+        <TextView
+            android:id="@+id/txt_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintBottom_toTopOf="@id/txt_recipe_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_user_image"
+            app:layout_constraintTop_toTopOf="@id/img_user_image"
+            tools:text="Urvish Sabhaya" />
+
+        <TextView
+            android:id="@+id/txt_recipe_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_user_image"
+            app:layout_constraintTop_toBottomOf="@id/txt_user_name"
+            tools:text="Breakfast" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
