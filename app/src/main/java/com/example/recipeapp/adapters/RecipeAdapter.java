@@ -1,8 +1,10 @@
 package com.example.recipeapp.adapters;
 
 import static com.example.recipeapp.activities.BaseActivity.getRecipeType;
+import static com.example.recipeapp.utils.Constants.RECIPE_MODEL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.recipeapp.R;
+import com.example.recipeapp.activities.ViewRecipeActivity;
 import com.example.recipeapp.models.Recipe;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -23,11 +26,10 @@ import java.util.ArrayList;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Recipe> recipeList;
+    ArrayList<Recipe> recipeList = new ArrayList<>();
 
-    public RecipeAdapter(Context context, ArrayList<Recipe> recipeList) {
+    public RecipeAdapter(Context context) {
         this.context = context;
-        this.recipeList = recipeList;
     }
 
     @NonNull
@@ -53,11 +55,22 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         holder.txt_recipe_name.setText(recipe.getRecipe_name());
         holder.txt_user_name.setText(recipe.getUploaded_by_name());
         holder.txt_recipe_category.setText(getRecipeType(recipe.getRecipe_type()));
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, ViewRecipeActivity.class);
+            intent.putExtra(RECIPE_MODEL, recipe);
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
         return recipeList.size();
+    }
+
+    public void setList(ArrayList<Recipe> recipes) {
+        recipeList.clear();
+        recipeList.addAll(recipes);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
