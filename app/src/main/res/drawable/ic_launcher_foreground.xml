@@ -9,13 +9,13 @@
         android:translateX="19.02"
         android:translateY="19.02">
         <path
-            android:fillColor="#ebebeb"
+            android:fillColor="#ffcd02"
             android:pathData="M32,32m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
         <path
             android:fillColor="#fff"
             android:pathData="M32.001,32m-20.353,14.17a24.8,24.8 100.155,1 1,40.707 -28.339a24.8,24.8 100.155,1 1,-40.707 28.339" />
         <path
-            android:fillColor="#dadde1"
+            android:fillColor="#ffcd02"
             android:pathData="M32,32m-23.5,0a23.5,23.5 0,1 1,47 0a23.5,23.5 0,1 1,-47 0" />
         <path
             android:fillColor="#80c350"

@@ -1,6 +1,7 @@
 package com.example.recipeapp.adapters;
 
 import static com.example.recipeapp.activities.BaseActivity.getRecipeType;
+import static com.example.recipeapp.utils.Constants.RECIPE_MODEL;
 
 import android.content.Context;
 import android.content.Intent;
@@ -57,6 +58,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, ViewRecipeActivity.class);
+            intent.putExtra(RECIPE_MODEL, recipe);
             context.startActivity(intent);
         });
     }

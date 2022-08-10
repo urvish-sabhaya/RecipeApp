@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,8 +33,11 @@ import com.example.recipeapp.adapters.RecipeAdapter;
 import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.models.RecipeType;
 import com.example.recipeapp.utils.Constants;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,9 +87,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         showProgressDialog();
         db.collection(RECIPES)
                 .get()
-                .addOnCompleteListener(task -> {
+                .addOnCompleteListener((Task<QuerySnapshot> task) -> {
                     if (task.isSuccessful() && task.getResult() != null) {
-                        List<Recipe> recipes = task.getResult().toObjects(Recipe.class);
+                        List<Recipe> recipes = new ArrayList<>();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            Recipe recipe = documentSnapshot.toObject(Recipe.class);
+                            recipe.setDocument_id(documentSnapshot.getId());
+                            recipes.add(recipe);
+                        }
                         recipesList.addAll(recipes);
                         setUpRecipeList(recipesList);
                     }
@@ -121,7 +128,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         add_recipe_fab = findViewById(R.id.add_recipe_fab);
         edt_search = findViewById(R.id.edt_search);
 
-        recycler_recipes.setLayoutManager(new GridLayoutManager(this, 2));
+        recycler_recipes.setLayoutManager(new LinearLayoutManager(this));
         recipeAdapter = new RecipeAdapter(this);
         recycler_recipes.setAdapter(recipeAdapter);
     }

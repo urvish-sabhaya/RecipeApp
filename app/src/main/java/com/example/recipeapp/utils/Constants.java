@@ -9,4 +9,7 @@ public class Constants {
     public static String rating_app_url = "https://play.google.com/store/apps/details?id=com.cutcom.apparmor.conestogac";
     public static String share_app_url = "https://play.google.com/store/apps/details?id=com.cutcom.apparmor.conestogac";
     public static ArrayList<RecipeType> recipesCategoryList = new ArrayList<>();
+
+    /*Intents*/
+    final public static String RECIPE_MODEL = "recipe_model";
 }

@@ -5,4 +5,8 @@
     <string name="sorry_recipes_not_available">Sorry Recipes Not Available</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
+    <string name="difficulty">DIFFICULTY:</string>
+    <string name="ingredients">INGREDIENTS</string>
+    <string name="utensils">utensils</string>
+    <string name="nutrition_per_servings">nutrition per servings</string>
 </resources>
