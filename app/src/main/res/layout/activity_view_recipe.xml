@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ViewRecipeActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F4F4F4"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp">
+
+                <ImageView
+                    android:id="@+id/recipe_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/food_test" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/splash_background"
+                    android:rotation="180" />
+
+                <TextView
+                    android:id="@+id/txt_recipe_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:ellipsize="end"
+                    android:fontFamily="monospace"
+                    android:maxLines="3"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingVertical="@dimen/_20sdp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold"
+                    tools:text="Roasted vegetable cousin" />
+
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@drawable/border"
+                android:padding="@dimen/_7sdp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/img_user_image"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="@dimen/_3sdp"
+                    tools:src="@drawable/food_test" />
+
+                <TextView
+                    android:id="@+id/txt_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:maxLines="1"
+                    android:textColor="@color/link_color"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_recipe_category"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_user_image"
+                    app:layout_constraintTop_toTopOf="@id/img_user_image"
+                    tools:text="Urvish Sabhaya" />
+
+                <TextView
+                    android:id="@+id/txt_recipe_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:maxLines="1"
+                    android:textColor="@color/lightBlack"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_user_image"
+                    app:layout_constraintTop_toBottomOf="@id/txt_user_name"
+                    tools:text="Breakfast" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/recipe_details_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_17sdp"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="@dimen/_5sdp"
+                android:textColor="@color/font_color"
+                android:textSize="@dimen/_16sdp"
+                tools:text="This recipe is inspired by the southeast asia larbThis recipe is inspired by the southeast asia larbThis recipe is inspired by the southeast asia larbThis recipe is inspired by the southeast asia larbThis recipe is inspired by the southeast asia larbThis recipe is inspired by the southeast asia larb" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:text="@string/difficulty"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/difficulty_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    tools:text="Easy" />
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_food_dish" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/divider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_15sdp">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/cooking_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="60"
+                    android:progress="0"
+                    app:indicatorColor="@color/yellow"
+                    app:indicatorSize="@dimen/_60sdp"
+                    app:layout_constraintEnd_toStartOf="@id/baking_progress"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:trackColor="@color/track" />
+
+                <TextView
+                    android:id="@+id/cooking_min_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:gravity="center"
+                    android:text="0 min."
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/cooking_progress"
+                    app:layout_constraintEnd_toEndOf="@id/cooking_progress"
+                    app:layout_constraintStart_toStartOf="@id/cooking_progress"
+                    app:layout_constraintTop_toTopOf="@id/cooking_progress" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:text="Cooking"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="@id/cooking_progress"
+                    app:layout_constraintStart_toStartOf="@id/cooking_progress"
+                    app:layout_constraintTop_toBottomOf="@id/cooking_progress" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/baking_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="60"
+                    android:progress="0"
+                    app:indicatorColor="@color/yellow"
+                    app:indicatorSize="@dimen/_60sdp"
+                    app:layout_constraintEnd_toStartOf="@id/resting_progress"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/cooking_progress"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:trackColor="@color/track" />
+
+                <TextView
+                    android:id="@+id/baking_min_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:gravity="center"
+                    android:text="0 min."
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/baking_progress"
+                    app:layout_constraintEnd_toEndOf="@id/baking_progress"
+                    app:layout_constraintStart_toStartOf="@id/baking_progress"
+                    app:layout_constraintTop_toTopOf="@id/baking_progress" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:text="Baking"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="@id/baking_progress"
+                    app:layout_constraintStart_toStartOf="@id/baking_progress"
+                    app:layout_constraintTop_toBottomOf="@id/baking_progress" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/resting_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="60"
+                    android:progress="0"
+                    app:indicatorColor="@color/yellow"
+                    app:indicatorSize="@dimen/_60sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/baking_progress"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:trackColor="@color/track" />
+
+                <TextView
+                    android:id="@+id/resting_min_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:gravity="center"
+                    android:text="0 min."
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/resting_progress"
+                    app:layout_constraintEnd_toEndOf="@id/resting_progress"
+                    app:layout_constraintStart_toStartOf="@id/resting_progress"
+                    app:layout_constraintTop_toTopOf="@id/resting_progress" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:text="Resting"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="@id/resting_progress"
+                    app:layout_constraintStart_toStartOf="@id/resting_progress"
+                    app:layout_constraintTop_toBottomOf="@id/resting_progress" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:text="@string/ingredients"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredients_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                tools:itemCount="1"
+                tools:listitem="@layout/ingredient_item" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:text="@string/utensils"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/utensils_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_17sdp"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:lineSpacingExtra="@dimen/_5sdp"
+                android:textColor="@color/font_color"
+                android:textSize="@dimen/_16sdp"
+                tools:text="frying pan, cooking spoon" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:text="@string/nutrition_per_servings"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/cal_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:gravity="center"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    tools:text="Cal\n685" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/lightBlack" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/protein_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:gravity="center"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    tools:text="Protein\n685" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/lightBlack" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/fat_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:gravity="center"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    tools:text="Fat\n685" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/lightBlack" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/carb_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/myriad_pro_regular"
+                    android:gravity="center"
+                    android:textColor="@color/font_color"
+                    android:textSize="@dimen/_15sdp"
+                    tools:text="Carb\n685" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/steps_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                tools:itemCount="1"
+                tools:listitem="@layout/steps_item" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:text="tags"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/tags_chips_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_17sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:chipSpacingHorizontal="@dimen/_4sdp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/back_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="#B3000000"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/back_arrow" />
+
+    </LinearLayout>
+
+</RelativeLayout>

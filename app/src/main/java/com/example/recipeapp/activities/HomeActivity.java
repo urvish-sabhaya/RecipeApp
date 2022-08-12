@@ -9,9 +9,13 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,7 +24,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +33,11 @@ import com.example.recipeapp.adapters.RecipeAdapter;
 import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.models.RecipeType;
 import com.example.recipeapp.utils.Constants;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +53,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     TextView no_recipes_txt;
     RecyclerView recycler_recipes;
     Dialog filterDialog;
+    FloatingActionButton add_recipe_fab;
+    EditText edt_search;
+    RecipeAdapter recipeAdapter;
+    ArrayList<Integer> selectedCategoriesFilter = new ArrayList<>();
+    TextWatcher textWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,23 +87,22 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         showProgressDialog();
         db.collection(RECIPES)
                 .get()
-                .addOnCompleteListener(task -> {
+                .addOnCompleteListener((Task<QuerySnapshot> task) -> {
                     if (task.isSuccessful() && task.getResult() != null) {
-                        List<Recipe> recipes = task.getResult().toObjects(Recipe.class);
+                        List<Recipe> recipes = new ArrayList<>();
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            Recipe recipe = documentSnapshot.toObject(Recipe.class);
+                            recipe.setDocument_id(documentSnapshot.getId());
+                            recipes.add(recipe);
+                        }
                         recipesList.addAll(recipes);
                         setUpRecipeList(recipesList);
                     }
-                    checkDataAvailability();
                     hideProgressDialog();
                 });
     }
 
     private void setUpRecipeList(ArrayList<Recipe> recipesList) {
-        recycler_recipes.setLayoutManager(new GridLayoutManager(this, 2));
-        recycler_recipes.setAdapter(new RecipeAdapter(this, recipesList));
-    }
-
-    private void checkDataAvailability() {
         if (recipesList.isEmpty()) {
             no_recipes_txt.setVisibility(View.VISIBLE);
             recycler_recipes.setVisibility(View.GONE);
@@ -99,6 +110,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             no_recipes_txt.setVisibility(View.GONE);
             recycler_recipes.setVisibility(View.VISIBLE);
         }
+        recipeAdapter.setList(recipesList);
+        recipeAdapter.notifyDataSetChanged();
     }
 
     private void initViews() {
@@ -112,6 +125,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         rel_filter = findViewById(R.id.rel_filter);
         no_recipes_txt = findViewById(R.id.no_recipes_txt);
         recycler_recipes = findViewById(R.id.recycler_recipes);
+        add_recipe_fab = findViewById(R.id.add_recipe_fab);
+        edt_search = findViewById(R.id.edt_search);
+
+        recycler_recipes.setLayoutManager(new LinearLayoutManager(this));
+        recipeAdapter = new RecipeAdapter(this);
+        recycler_recipes.setAdapter(recipeAdapter);
     }
 
     private void setClicks() {
@@ -122,6 +141,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         privacy_nav.setOnClickListener(this);
         profile_nav.setOnClickListener(this);
         rel_filter.setOnClickListener(this);
+        add_recipe_fab.setOnClickListener(this);
 
         drawer_layout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -144,6 +164,43 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
             }
         });
+
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                selectedCategoriesFilter.clear();
+                searchRecipes(editable.toString().toLowerCase());
+            }
+        };
+
+        edt_search.addTextChangedListener(textWatcher);
+    }
+
+    private void searchRecipes(String searchText) {
+        if (TextUtils.isEmpty(searchText)) {
+            setUpRecipeList(recipesList);
+            return;
+        }
+
+        ArrayList<Recipe> searchList = new ArrayList<>();
+
+        for (Recipe recipe : recipesList) {
+            if (recipe.getRecipe_name().toLowerCase().contains(searchText)) {
+                searchList.add(recipe);
+            }
+        }
+
+        setUpRecipeList(searchList);
     }
 
     @Override
@@ -178,6 +235,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.rel_filter:
                 selectFilterDialog();
+                break;
+            case R.id.add_recipe_fab:
+                Toast.makeText(this, "Add Recipe", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -218,17 +278,43 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         txt_apply = filterDialog.findViewById(R.id.txt_apply);
         close_btn = filterDialog.findViewById(R.id.close_btn);
 
-        txt_apply.setOnClickListener(view1 -> filterDialog.dismiss());
+        FilterAdapter filterAdapter = new FilterAdapter(this, recipesCategoryList, selectedCategoriesFilter);
+
+        txt_apply.setOnClickListener(view1 -> {
+            edt_search.removeTextChangedListener(textWatcher);
+            edt_search.setText("");
+            edt_search.addTextChangedListener(textWatcher);
+
+            filterDialog.dismiss();
+            selectedCategoriesFilter = filterAdapter.selectedCategories;
+            if (!selectedCategoriesFilter.isEmpty()) {
+                filterRecipes(selectedCategoriesFilter);
+            } else {
+                setUpRecipeList(recipesList);
+            }
+        });
         close_btn.setOnClickListener(view12 -> filterDialog.dismiss());
 
         RecyclerView filter_items_recycler;
         filter_items_recycler = filterDialog.findViewById(R.id.filter_items_recycler);
         filter_items_recycler.setLayoutManager(new LinearLayoutManager(this));
-        filter_items_recycler.setAdapter(new FilterAdapter(this, recipesCategoryList));
+        filter_items_recycler.setAdapter(filterAdapter);
 
         filterDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         filterDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         filterDialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         filterDialog.show();
+    }
+
+    private void filterRecipes(ArrayList<Integer> selectedCat) {
+        ArrayList<Recipe> searchList = new ArrayList<>();
+
+        for (Recipe recipe : recipesList) {
+            if (selectedCat.contains(recipe.getRecipe_type())) {
+                searchList.add(recipe);
+            }
+        }
+
+        setUpRecipeList(searchList);
     }
 }
