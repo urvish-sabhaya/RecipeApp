@@ -68,7 +68,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
         initViews();
         setClicks();
-        fetchRecipes();
         fetchRecipeTypes();
     }
 
@@ -78,6 +77,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         List<RecipeType> recipesCategories = task.getResult().toObjects(RecipeType.class);
+                        recipesCategoryList.clear();
                         recipesCategoryList.addAll(recipesCategories);
                     }
                 });
@@ -95,6 +95,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                             recipe.setDocument_id(documentSnapshot.getId());
                             recipes.add(recipe);
                         }
+                        recipesList.clear();
                         recipesList.addAll(recipes);
                         setUpRecipeList(recipesList);
                     }
@@ -237,7 +238,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 selectFilterDialog();
                 break;
             case R.id.add_recipe_fab:
-                Toast.makeText(this, "Add Recipe", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, AddRecipeActivity.class));
                 break;
         }
     }
@@ -316,5 +317,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         }
 
         setUpRecipeList(searchList);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchRecipes();
     }
 }
