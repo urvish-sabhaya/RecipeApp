@@ -3,6 +3,7 @@ package com.example.recipeapp.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView textView2;
     boolean isAllFieldsChecked = false;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,24 +44,33 @@ public class LoginActivity extends AppCompatActivity {
         textView2=findViewById(R.id.textView2);
         dbroot=FirebaseFirestore.getInstance();
 
+
+
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(i);
+
+            }
+        });
+
+
         btnUserLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fetchData();
                 isAllFieldsChecked = CheckAllFields();
-
-
-                if(isAllFieldsChecked){
-                    Intent i = new Intent(LoginActivity.this,HomeActivity.class);
-                    startActivity(i);
-                }
-
+//                if(isAllFieldsChecked){
+//                    Intent i = new Intent(LoginActivity.this,HomeActivity.class);
+//                    startActivity(i);
+//                }
             }
         });
-
     }
     private boolean CheckAllFields(){
-
         if(userEmail.length()==0){
             userEmail.setError("Kindly enter a valid email address");
             return false;
@@ -73,14 +85,27 @@ public class LoginActivity extends AppCompatActivity {
 
     public void fetchData(){
         String userDoc = userEmail.getText().toString();
+
+        String checkUserPass = userPassword.getText().toString();
+
         DocumentReference document = dbroot.collection("users").document(userDoc);
         document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+
+
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.exists()){
+
+                String checkpass = documentSnapshot.getString("user_password");
+
+                if(documentSnapshot.exists()&&isAllFieldsChecked){
                     textView2.setText(documentSnapshot.getString("user_name")+" "+documentSnapshot.getString("user_email"));
+
+                        Intent i = new Intent(LoginActivity.this,HomeActivity.class);
+                        startActivity(i);
+
                 }else
-                    Toast.makeText(getApplicationContext(),"Row not found",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"User not found or password is wrong",Toast.LENGTH_LONG).show();
             }
         })
                 .addOnFailureListener(new OnFailureListener() {

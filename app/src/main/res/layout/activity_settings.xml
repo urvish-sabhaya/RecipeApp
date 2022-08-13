@@ -36,6 +36,39 @@
 
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/txtsecurityQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Security Question"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/txtsecurityQuestionAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Security Question Answer"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/txtNewPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New Password"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginTop="20dp"/>
+
     <!--Remaining code will be here-->
 
 </LinearLayout>

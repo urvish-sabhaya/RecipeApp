@@ -54,7 +54,7 @@ public class SignUpActivity extends BaseActivity {
                 // the boolean variable turns to be true then
                 // only the user must be proceed to the activity2
                 if(isAllFieldsChecked){
-                    Intent i = new Intent(SignUpActivity.this,HomeActivity.class);
+                    Intent i = new Intent(SignUpActivity.this,LoginActivity.class);
                     startActivity(i);
                 }
             }
