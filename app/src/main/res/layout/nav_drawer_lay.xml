@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:text="www.recipe.com"
+            android:text="www.cookbook.com"
             android:textColor="@color/white"
             android:textSize="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -64,14 +64,44 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:src="@drawable/usernew"
-            app:tint="@color/lightBlack" />
+            app:tint="@color/colorAccent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Profile"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_15sdp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5sp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/my_recipes_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/_12sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:src="@drawable/ic_hot_food"
+            app:tint="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:text="My Recipes"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>
@@ -95,7 +125,7 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:src="@drawable/gear"
-            app:tint="@color/lightBlack" />
+            app:tint="@color/colorAccent" />
 
         <TextView
             android:id="@+id/navSettingTxt"
@@ -103,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Settings"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>
@@ -127,7 +157,7 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:src="@drawable/share"
-            app:tint="@color/lightBlack" />
+            app:tint="@color/colorAccent" />
 
         <TextView
             android:id="@+id/navShareTxt"
@@ -135,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Share App"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>
@@ -159,7 +189,7 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:src="@drawable/rating"
-            app:tint="@color/lightBlack" />
+            app:tint="@color/colorAccent" />
 
         <TextView
             android:id="@+id/navRatingTxt"
@@ -167,7 +197,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Rate us"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>
@@ -191,7 +221,7 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_20sdp"
             android:src="@drawable/privacy"
-            app:tint="@color/lightBlack" />
+            app:tint="@color/colorAccent" />
 
         <TextView
             android:id="@+id/navPrivacyPolicyTxt"
@@ -199,7 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Privacy &amp; Policy"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>

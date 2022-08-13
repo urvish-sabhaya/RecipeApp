@@ -1,11 +1,14 @@
 package com.example.recipeapp.models;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Recipe implements Serializable {
+
     String document_id, recipe_image, recipe_name, uploaded_by_name, uploaded_by_image, recipe_details,
-            recipe_difficulty;
+            recipe_difficulty, uploaded_by_email;
 
     int recipe_type, baking_time, cooking_time, resting_time, nutrition_calorie,
             nutrition_carb, nutrition_fat, nutrition_protein;
@@ -15,6 +18,15 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
+    public String getUploaded_by_email() {
+        return uploaded_by_email;
+    }
+
+    public void setUploaded_by_email(String uploaded_by_email) {
+        this.uploaded_by_email = uploaded_by_email;
+    }
+
+    @Exclude
     public String getDocument_id() {
         return document_id;
     }
@@ -151,6 +163,7 @@ public class Recipe implements Serializable {
         this.recipe_type = recipe_type;
     }
 
+    @Exclude
     public int getRecipe_total_minute() {
         return getBaking_time() + getResting_time() + getCooking_time();
     }

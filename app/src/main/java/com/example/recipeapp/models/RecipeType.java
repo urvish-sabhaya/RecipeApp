@@ -1,5 +1,7 @@
 package com.example.recipeapp.models;
 
+import androidx.annotation.NonNull;
+
 public class RecipeType {
     int recipe_id;
     String recipe_name;
@@ -26,5 +28,11 @@ public class RecipeType {
 
     public void setRecipe_name(String recipe_name) {
         this.recipe_name = recipe_name;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return recipe_name;
     }
 }
