@@ -1,9 +1,23 @@
 package com.example.recipeapp.models;
 
+import com.google.firebase.firestore.Exclude;
+
 public class RecipeIngredient {
+
+    String document_id;
+
     String matric_for, metric;
 
     public RecipeIngredient() {
+    }
+
+    @Exclude
+    public String getDocument_id() {
+        return document_id;
+    }
+
+    public void setDocument_id(String document_id) {
+        this.document_id = document_id;
     }
 
     public String getMatric_for() {

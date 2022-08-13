@@ -420,7 +420,6 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:fontFamily="@font/myriad_pro_regular"
                 android:text="@string/utensils"
-                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
@@ -499,7 +498,6 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:fontFamily="@font/myriad_pro_regular"
                 android:text="@string/nutrition_per_servings"
-                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
@@ -612,6 +610,17 @@
                 android:layout_height="1dp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:background="@color/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/myriad_pro_regular"
+                android:text="@string/recipe_steps"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/steps_recycler"
@@ -730,8 +739,7 @@
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:fontFamily="@font/myriad_pro_regular"
-                android:text="tags"
-                android:textAllCaps="true"
+                android:text="@string/tags"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
@@ -828,12 +836,13 @@
             android:src="@drawable/back_arrow" />
 
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_10sdp"
             android:text="Add New Recipe"
             android:textColor="@color/white"
-            android:textSize="@dimen/_17sdp" />
+            android:textSize="@dimen/_16sdp" />
 
     </LinearLayout>
 

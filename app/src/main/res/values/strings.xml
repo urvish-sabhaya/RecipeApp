@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">CookBook</string>
-    <string name="app_title">Recipes</string>
+    <string name="app_title">CookBook</string>
     <string name="search">Search recipes by name</string>
     <string name="sorry_recipes_not_available">Sorry Recipes Not Available</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
-    <string name="difficulty">DIFFICULTY:</string>
-    <string name="ingredients">INGREDIENTS</string>
-    <string name="utensils">utensils</string>
-    <string name="nutrition_per_servings">nutrition per servings</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="utensils">Utensils</string>
+    <string name="nutrition_per_servings">Nutrition Per Servings</string>
     <string name="add_new_ingredient">Add New Ingredient</string>
+    <string name="tags">Tags</string>
+    <string name="recipe_steps">Recipe Steps</string>
 </resources>
