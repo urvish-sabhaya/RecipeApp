@@ -12,4 +12,5 @@ public class Constants {
 
     /*Intents*/
     final public static String RECIPE_MODEL = "recipe_model";
+    final public static String EDIT_RECIPE = "edit_recipe";
 }
