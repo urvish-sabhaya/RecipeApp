@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.recipeapp.R;
@@ -20,6 +21,7 @@ public class LoginActivity extends BaseActivity {
     Button btnSignUp, btnUserLogin;
     EditText userEmail, userPassword;
     FirebaseFirestore db;
+    TextView forgot_password_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +33,15 @@ public class LoginActivity extends BaseActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         userEmail = findViewById(R.id.userEmail);
         userPassword = findViewById(R.id.userPassword);
+        forgot_password_txt = findViewById(R.id.forgot_password_txt);
         db = FirebaseFirestore.getInstance();
 
         btnSignUp.setOnClickListener(view -> {
-            Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+            Intent i = new Intent(this, SignUpActivity.class);
+            startActivity(i);
+        });
+        forgot_password_txt.setOnClickListener(view -> {
+            Intent i = new Intent(this, ForgotPasswordActivity.class);
             startActivity(i);
         });
 
@@ -80,8 +87,8 @@ public class LoginActivity extends BaseActivity {
                     appSharedPreference.setUserInfo(currentUser);
 
                     Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
-                    finish();
                 })
                 .addOnFailureListener(e -> {
                     hideProgressDialog();
