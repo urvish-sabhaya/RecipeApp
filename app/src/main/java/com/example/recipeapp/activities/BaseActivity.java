@@ -28,6 +28,7 @@ import com.example.recipeapp.R;
 import com.example.recipeapp.models.RecipeType;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -98,6 +99,16 @@ public class BaseActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    public String decodeBase64(String base64Text) {
+        byte[] data = Base64.decode(base64Text, Base64.DEFAULT);
+        return new String(data, StandardCharsets.UTF_8);
+    }
+
+    public String encodeBase64(String normalText) {
+        byte[] data = normalText.getBytes(StandardCharsets.UTF_8);
+        return Base64.encodeToString(data, Base64.DEFAULT);
     }
 
     public boolean checkAndRequestPermissions(final Activity context) {

@@ -12,4 +12,11 @@
     <string name="add_new_ingredient">Add New Ingredient</string>
     <string name="tags">Tags</string>
     <string name="recipe_steps">Recipe Steps</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_your_old_password">Enter your old password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="enter_your_confirm_password">Enter your confirm new password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
 </resources>
