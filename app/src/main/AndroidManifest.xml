@@ -22,11 +22,15 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.MyRecipeActivity"
+            android:name=".activities.AddRecipeActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.AddRecipeActivity"
+            android:name=".activities.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -35,10 +39,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SettingsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.ProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

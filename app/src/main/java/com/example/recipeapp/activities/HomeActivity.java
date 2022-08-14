@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,7 +48,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     FirebaseFirestore db;
     ImageView drawer_btn;
     DrawerLayout drawer_layout;
-    LinearLayout setting_nav, share_nav, rating_nav, privacy_nav, profile_nav, my_recipes_nav;
+    LinearLayout setting_nav, share_nav, rating_nav, privacy_nav, logout_nav, profile_nav, my_recipes_nav;
     RelativeLayout rel_filter;
     ArrayList<Recipe> recipesList = new ArrayList<>();
     TextView no_recipes_txt;
@@ -123,6 +124,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         share_nav = findViewById(R.id.share_nav);
         rating_nav = findViewById(R.id.rating_nav);
         privacy_nav = findViewById(R.id.privacy_nav);
+        logout_nav = findViewById(R.id.logout_nav);
         profile_nav = findViewById(R.id.profile_nav);
         rel_filter = findViewById(R.id.rel_filter);
         no_recipes_txt = findViewById(R.id.no_recipes_txt);
@@ -142,6 +144,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         share_nav.setOnClickListener(this);
         rating_nav.setOnClickListener(this);
         privacy_nav.setOnClickListener(this);
+        logout_nav.setOnClickListener(this);
         profile_nav.setOnClickListener(this);
         rel_filter.setOnClickListener(this);
         add_recipe_fab.setOnClickListener(this);
@@ -222,7 +225,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.my_recipes_nav:
                 drawer_layout.closeDrawer(Gravity.LEFT);
-                startActivity(new Intent(this, MyRecipeActivity.class));
+//                startActivity(new Intent(this, MyRecipeActivity.class));
                 break;
             case R.id.share_nav:
                 drawer_layout.closeDrawer(Gravity.LEFT);
@@ -236,9 +239,31 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 drawer_layout.closeDrawer(Gravity.LEFT);
                 openWebPage(Constants.privacy_policy_url);
                 break;
+            case R.id.logout_nav:
+                drawer_layout.closeDrawer(Gravity.LEFT);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setTitle("Logout");
+                builder.setMessage("Are you sure you want to Logout?");
+
+                builder.setPositiveButton("YES", (dialog, which) -> {
+                    dialog.dismiss();
+                    appSharedPreference.setUserInfo(null);
+                    Intent i = new Intent(HomeActivity.this, SplashScreen.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                });
+
+                builder.setNegativeButton("NO", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+                break;
             case R.id.profile_nav:
                 drawer_layout.closeDrawer(Gravity.LEFT);
-                startActivity(new Intent(this, ProfileActivity.class));
+//                startActivity(new Intent(this, ProfileActivity.class));
                 break;
             case R.id.rel_filter:
                 selectFilterDialog();

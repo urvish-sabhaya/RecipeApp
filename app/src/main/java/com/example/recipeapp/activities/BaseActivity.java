@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.recipeapp.R;
 import com.example.recipeapp.models.RecipeType;
+import com.example.recipeapp.utils.AppSharedPreference;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
@@ -37,10 +38,12 @@ public class BaseActivity extends AppCompatActivity {
 
     public Dialog progressDialog = null;
     public final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
+    AppSharedPreference appSharedPreference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appSharedPreference = new AppSharedPreference(this);
     }
 
     public static String getRecipeType(int categoryID) {
