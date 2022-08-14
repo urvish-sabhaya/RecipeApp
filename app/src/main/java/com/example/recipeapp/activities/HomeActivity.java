@@ -225,7 +225,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.my_recipes_nav:
                 drawer_layout.closeDrawer(Gravity.LEFT);
-//                startActivity(new Intent(this, MyRecipeActivity.class));
+                startActivity(new Intent(this, MyRecipeActivity.class));
                 break;
             case R.id.share_nav:
                 drawer_layout.closeDrawer(Gravity.LEFT);
@@ -263,7 +263,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.profile_nav:
                 drawer_layout.closeDrawer(Gravity.LEFT);
-//                startActivity(new Intent(this, ProfileActivity.class));
+                startActivity(new Intent(this, ProfileActivity.class));
                 break;
             case R.id.rel_filter:
                 selectFilterDialog();
