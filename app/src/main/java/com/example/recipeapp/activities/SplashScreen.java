@@ -20,7 +20,11 @@ public class SplashScreen extends BaseActivity {
         );
 
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(SplashScreen.this, SignUpActivity.class));
+            if (appSharedPreference.getUserInfo() == null) {
+                startActivity(new Intent(this, LoginActivity.class));
+            } else {
+                startActivity(new Intent(this, HomeActivity.class));
+            }
             finish();
         }, 3000);
     }

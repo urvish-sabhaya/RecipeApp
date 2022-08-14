@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/_15sdp">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Welcome To Our Recipe App"
+        android:text="Welcome To CookBook"
         android:textAlignment="center"
         android:textColor="#2F6E02"
         android:textSize="24sp"
@@ -34,36 +33,34 @@
         android:id="@+id/imageView2"
         android:layout_width="280dp"
         android:layout_height="95dp"
-        app:srcCompat="@drawable/recipeapplogo"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="40dp"/>
-
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/recipeapplogo" />
 
     <EditText
         android:id="@+id/userEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:layout_marginTop="20dp"
-        android:hint="Email" />
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName" />
+
     <EditText
         android:id="@+id/userPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:layout_marginTop="20dp"
-        android:hint="Password"/>
-
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnUserLogin"
         android:layout_width="319dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
         android:backgroundTint="#039122"
         android:text="Login" />
 
@@ -81,17 +78,9 @@
         android:id="@+id/btnSignUp"
         android:layout_width="319dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
         android:backgroundTint="#039122"
         android:text="Sign Up" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
 
 </LinearLayout>
