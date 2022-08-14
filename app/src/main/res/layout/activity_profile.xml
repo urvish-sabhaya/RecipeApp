@@ -66,10 +66,16 @@
         android:id="@+id/textName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="Name"
-        android:textAlignment="center"
-        android:textSize="16sp" />
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@drawable/border"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:hint="User Name"
+        android:inputType="textMultiLine"
+        android:editable="false"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
 
     <TextView
         android:id="@+id/textEmail"
@@ -80,18 +86,16 @@
         android:textAlignment="center"
         android:textSize="16sp" />
 
+
+
     <Button
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit" />
+        android:layout_marginTop="30dp"
+        android:text="Edit and Save" />
 
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save" />
 
 
 

@@ -84,10 +84,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void fetchData(){
+
+        //Getting username from the textbox and getting the documetn id from database
         String userDoc = userEmail.getText().toString();
 
         String checkUserPass = userPassword.getText().toString();
 
+        //Setting document reference
         DocumentReference document = dbroot.collection("users").document(userDoc);
         document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
@@ -108,10 +111,12 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"User not found or password is wrong",Toast.LENGTH_LONG).show();
             }
         })
+
+
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Failedf to fetch data",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Failed to fetch data",Toast.LENGTH_LONG).show();
                     }
                 });
     }
