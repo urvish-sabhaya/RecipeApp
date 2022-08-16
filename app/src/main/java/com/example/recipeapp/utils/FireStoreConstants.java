@@ -13,4 +13,7 @@ public class FireStoreConstants {
     public static String USER_SECURITY = "user_security";
     public static String USER_NAME = "user_name";
     public static String USER_IMAGE = "user_image";
+    public static String USER_EMAIL = "user_email";
+    public static String SECURITY_QUESTION = "security_question";
+    public static String SECURITY_QUESTION_ANSWER = "security_question_answer";
 }

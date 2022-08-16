@@ -118,7 +118,7 @@ public class ForgotPasswordActivity extends BaseActivity {
             return;
         }
 
-        if (newPass.length() <= 6) {
+        if (newPass.length() < 6) {
             Toast.makeText(this, "Password should be more than 6 characters", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -142,20 +142,8 @@ public class ForgotPasswordActivity extends BaseActivity {
         documentReference
                 .update(USER_SECURITY, encoded)
                 .addOnSuccessListener(aVoid -> {
-//                    currentUser.setUser_security(encoded);
-//                    appSharedPreference.setUserInfo(currentUser);
                     Toast.makeText(ForgotPasswordActivity.this, "Your password has been changed successfully", Toast.LENGTH_SHORT).show();
                     hideProgressDialog();
-
-                   /* question_lay_lin.setVisibility(View.GONE);
-                    check_email_btn.setVisibility(View.VISIBLE);
-                    edt_email.setEnabled(true);
-
-                    edt_email.setText("");
-                    edt_security_question.setText("");
-                    edt_security_answer.setText("");
-                    edt_new_password.setText("");
-                    edt_confirm_password.setText("");*/
 
                     Intent i = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -1,112 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/_15sdp"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/back_screen"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/_15sdp">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Welcome To Our Recipe App"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="@string/welcome_to_cookbook"
         android:textAlignment="center"
-        android:textColor="#2F6E02"
-        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_20sdp"
         android:textStyle="bold|italic" />
 
     <TextView
-        android:id="@+id/signUpTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Sign Up"
+        android:text="@string/signup"
         android:textAlignment="center"
-        android:textColor="#2F6E02"
-        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_20sdp"
         android:textStyle="bold|italic" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="280dp"
-        android:layout_height="95dp"
-        android:layout_gravity="center_horizontal"
-        app:srcCompat="@drawable/recipeapplogo" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="@string/full_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15sdp" />
 
     <EditText
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="textPersonName" />
+        android:background="@drawable/border"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:hint="@string/full_name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="@string/email"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15sdp" />
 
     <EditText
         android:id="@+id/userEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName" />
+        android:background="@drawable/border"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:hint="@string/email"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="@string/password"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15sdp" />
 
     <EditText
         android:id="@+id/userPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:background="@drawable/border"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:maxLength="10"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="@string/security_question"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15sdp" />
 
     <EditText
         android:id="@+id/securityQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Security Question"
-        android:inputType="textPersonName" />
+        android:background="@drawable/border"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:hint="@string/security_question"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="@string/security_question_answer"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15sdp" />
 
     <EditText
         android:id="@+id/securityAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Security Question Answer"
-        android:inputType="textPersonName" />
+        android:background="@drawable/border"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:hint="@string/security_question_answer"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="319dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#039122"
-        android:text="Sign Up" />
-
-    <TextView
-        android:id="@+id/alreadyRegistered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Already Registered? Login Here"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:textStyle="bold|italic" />
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/signup" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="319dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#039122"
-        android:text="Login" />
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="@string/login" />
 
 </LinearLayout>
