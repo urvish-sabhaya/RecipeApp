@@ -20,10 +20,9 @@
             android:layout_height="@dimen/_70sdp"
             android:layout_margin="@dimen/_2sdp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btns_lay"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius_bottom_left="@dimen/_7sdp"
             app:riv_corner_radius_top_left="@dimen/_7sdp"
             tools:src="@drawable/food_test" />
 
@@ -39,7 +38,7 @@
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/txt_recipe_description"
-            app:layout_constraintEnd_toStartOf="@id/edit_rel"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_recipe_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Roasted vegetable cousin cousincousincousincousincousincousin" />
@@ -52,31 +51,59 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_rel"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/btns_lay"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_recipe_image"
             app:layout_constraintTop_toBottomOf="@+id/txt_recipe_name"
             tools:text="Roasted vegetable cousin cousincousincousincousincousincousin" />
 
-        <RelativeLayout
-            android:id="@+id/edit_rel"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/_2sdp"
-            android:background="@drawable/edit_back"
-            android:padding="@dimen/_10sdp"
+        <LinearLayout
+            android:id="@+id/btns_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_recipe_image">
 
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_edit" />
+            <RelativeLayout
+                android:id="@+id/edit_rel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_back"
+                android:padding="@dimen/_6sdp">
 
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_edit" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/delete_rel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_weight="1"
+                android:background="@drawable/delete_back"
+                android:padding="@dimen/_6sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_delete" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

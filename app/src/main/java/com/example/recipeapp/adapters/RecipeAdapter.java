@@ -1,7 +1,8 @@
 package com.example.recipeapp.adapters;
 
 import static com.example.recipeapp.activities.BaseActivity.getRecipeType;
-import static com.example.recipeapp.utils.Constants.RECIPE_MODEL;
+import static com.example.recipeapp.utils.Constants.VIEW_RECIPE;
+import static com.example.recipeapp.utils.Constants.viewableRecipe;
 
 import android.content.Context;
 import android.content.Intent;
@@ -58,10 +59,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         holder.txt_recipe_category.setText(getRecipeType(recipe.getRecipe_type()));
 
         holder.itemView.setOnClickListener(view -> {
+            viewableRecipe = recipe;
             Intent intent = new Intent(context, ViewRecipeActivity.class);
-            intent.putExtra(RECIPE_MODEL, recipe);
+            intent.putExtra(VIEW_RECIPE, "recipe");
             context.startActivity(intent);
         });
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
     }
 
     @Override

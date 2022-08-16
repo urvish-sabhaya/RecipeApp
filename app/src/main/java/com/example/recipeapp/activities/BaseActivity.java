@@ -48,9 +48,9 @@ public class BaseActivity extends AppCompatActivity {
         appSharedPreference = new AppSharedPreference(this);
     }
 
-    public static String getRecipeType(int categoryID) {
+    public static String getRecipeType(String categoryID) {
         for (RecipeType recipeType : recipesCategoryList) {
-            if (recipeType.getRecipe_id() == categoryID) {
+            if (recipeType.getDocument_id().equals(categoryID)) {
                 return recipeType.getRecipe_name();
             }
         }

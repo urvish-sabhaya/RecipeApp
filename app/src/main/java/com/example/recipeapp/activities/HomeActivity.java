@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,16 +24,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.recipeapp.R;
 import com.example.recipeapp.adapters.FilterAdapter;
 import com.example.recipeapp.adapters.RecipeAdapter;
 import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.models.RecipeType;
+import com.example.recipeapp.models.User;
 import com.example.recipeapp.utils.Constants;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,21 +47,26 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     FirebaseFirestore db;
     ImageView drawer_btn;
     DrawerLayout drawer_layout;
+    final public int ADD_NEW_RECIPE_INTENT = 101;
     LinearLayout change_pass_nav, share_nav, rating_nav, privacy_nav, logout_nav, profile_nav, my_recipes_nav;
     RelativeLayout rel_filter;
     ArrayList<Recipe> recipesList = new ArrayList<>();
-    TextView no_recipes_txt;
+    CircleImageView user_image;
     RecyclerView recycler_recipes;
     Dialog filterDialog;
     FloatingActionButton add_recipe_fab;
     EditText edt_search;
-    ArrayList<Integer> selectedCategoriesFilter = new ArrayList<>();
+    TextView no_recipes_txt, user_name, user_email;
     TextWatcher textWatcher;
+    ArrayList<String> selectedCategoriesFilter = new ArrayList<>();
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +78,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         initViews();
         setClicks();
         fetchRecipeTypes();
+        fetchRecipes();
     }
 
     private void fetchRecipeTypes() {
@@ -76,7 +86,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
-                        List<RecipeType> recipesCategories = task.getResult().toObjects(RecipeType.class);
+                        List<RecipeType> recipesCategories = new ArrayList<>();
+
+                        for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                            RecipeType recipeType = documentSnapshot.toObject(RecipeType.class);
+                            recipeType.setDocument_id(documentSnapshot.getId());
+                            recipesCategories.add(recipeType);
+                        }
+
                         recipesCategoryList.clear();
                         recipesCategoryList.addAll(recipesCategories);
                     }
@@ -130,6 +147,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         recycler_recipes = findViewById(R.id.recycler_recipes);
         add_recipe_fab = findViewById(R.id.add_recipe_fab);
         edt_search = findViewById(R.id.edt_search);
+        user_image = findViewById(R.id.user_image);
+        user_name = findViewById(R.id.user_name);
+        user_email = findViewById(R.id.user_email);
 
         recycler_recipes.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -266,7 +286,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 selectFilterDialog();
                 break;
             case R.id.add_recipe_fab:
-                startActivity(new Intent(this, AddRecipeActivity.class));
+                startActivityForResult(new Intent(this, AddRecipeActivity.class), ADD_NEW_RECIPE_INTENT);
+//                startActivity(new Intent(this, AddRecipeActivity.class));
                 break;
         }
     }
@@ -335,21 +356,41 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         filterDialog.show();
     }
 
-    private void filterRecipes(ArrayList<Integer> selectedCat) {
+    private void filterRecipes(ArrayList<String> selectedCat) {
         ArrayList<Recipe> searchList = new ArrayList<>();
-
         for (Recipe recipe : recipesList) {
             if (selectedCat.contains(recipe.getRecipe_type())) {
                 searchList.add(recipe);
             }
         }
-
         setUpRecipeList(searchList);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_NEW_RECIPE_INTENT &&
+                resultCode == RESULT_OK) {
+            fetchRecipes();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        fetchRecipes();
+        setUserProfile();
+    }
+
+    private void setUserProfile() {
+        currentUser = appSharedPreference.getUserInfo();
+        if (currentUser != null) {
+            if (!TextUtils.isEmpty(currentUser.getUser_image())) {
+                Glide.with(this)
+                        .load(Base64.decode(currentUser.getUser_image(), Base64.DEFAULT))
+                        .into(user_image);
+            }
+            user_email.setText(currentUser.getUser_email());
+            user_name.setText(currentUser.getUser_name());
+        }
     }
 }

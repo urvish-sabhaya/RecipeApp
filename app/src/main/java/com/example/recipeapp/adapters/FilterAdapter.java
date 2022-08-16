@@ -18,9 +18,9 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
     Context context;
     ArrayList<RecipeType> categoryList;
-    public ArrayList<Integer> selectedCategories = new ArrayList<>();
+    public ArrayList<String> selectedCategories = new ArrayList<>();
 
-    public FilterAdapter(Context context, ArrayList<RecipeType> categoryList, ArrayList<Integer> selectedCategoriesFilter) {
+    public FilterAdapter(Context context, ArrayList<RecipeType> categoryList, ArrayList<String> selectedCategoriesFilter) {
         this.context = context;
         this.categoryList = categoryList;
         selectedCategories.addAll(selectedCategoriesFilter);
@@ -38,7 +38,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
         holder.category_check.setText(filter.getRecipe_name());
 
         if (!selectedCategories.isEmpty() &&
-                selectedCategories.contains(filter.getRecipe_id())) {
+                selectedCategories.contains(filter.getDocument_id())) {
             holder.category_check.setChecked(true);
         }
 
@@ -46,10 +46,10 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
             boolean isChecked = holder.category_check.isChecked();
             if (isChecked) {
                 //checkBox clicked and checked
-                selectedCategories.add(filter.getRecipe_id());
+                selectedCategories.add(filter.getDocument_id());
             } else {
                 //checkBox clicked and unchecked
-                selectedCategories.remove(Integer.valueOf(filter.getRecipe_id()));
+                selectedCategories.remove(filter.getDocument_id());
             }
         });
     }
