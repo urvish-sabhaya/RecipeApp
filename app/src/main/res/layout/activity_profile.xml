@@ -36,39 +36,61 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="142dp"
-        android:orientation="vertical"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="0dp">
+    <RelativeLayout
+        android:id="@+id/profile_image_rel"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/_20sdp">
 
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_user"
+            app:riv_corner_radius="@dimen/_8sdp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            tools:srcCompat="@tools:sample/avatars" />
-    </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/circle_back"
+            android:backgroundTint="@color/colorAccent"
+            android:padding="@dimen/_7sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_edit"
+                app:tint="@color/white" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Photo"
-        android:textAlignment="center" />
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="Name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15sdp" />
 
     <EditText
-        android:id="@+id/textName"
+        android:id="@+id/edt_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:background="@drawable/border"
-        android:editable="false"
         android:fontFamily="@font/myriad_pro_regular"
-        android:hint="User Name"
+        android:hint="Name"
         android:inputType="textMultiLine"
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_5sdp"
@@ -76,23 +98,36 @@
         android:textSize="@dimen/_16sdp" />
 
     <TextView
-        android:id="@+id/textEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/myriad_pro_regular"
+        android:text="Email"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15sdp" />
+
+    <EditText
+        android:id="@+id/edt_user_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@drawable/border"
+        android:enabled="false"
+        android:fontFamily="@font/myriad_pro_regular"
         android:hint="Email"
-        android:textAlignment="center"
-        android:textSize="16sp" />
-
+        android:inputType="textMultiLine"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp" />
 
     <Button
-        android:id="@+id/edit"
+        android:id="@+id/update_profile_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Edit and Save" />
-
-
-    <!--Remaining code will be here-->
+        android:layout_margin="@dimen/_15sdp"
+        android:text="update profile" />
 
 </LinearLayout>
