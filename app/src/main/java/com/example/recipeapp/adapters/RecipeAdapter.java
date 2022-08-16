@@ -26,10 +26,11 @@ import java.util.ArrayList;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Recipe> recipeList = new ArrayList<>();
+    ArrayList<Recipe> recipeList;
 
-    public RecipeAdapter(Context context) {
+    public RecipeAdapter(Context context, ArrayList<Recipe> recipesList) {
         this.context = context;
+        this.recipeList = recipesList;
     }
 
     @NonNull
@@ -66,11 +67,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return recipeList.size();
-    }
-
-    public void setList(ArrayList<Recipe> recipes) {
-        recipeList.clear();
-        recipeList.addAll(recipes);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

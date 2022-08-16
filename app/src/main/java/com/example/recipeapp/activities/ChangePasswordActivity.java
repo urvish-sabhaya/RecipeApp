@@ -31,7 +31,7 @@ public class ChangePasswordActivity extends BaseActivity {
 
         initViews();
 
-        fetchUserDetails();
+        currentUser = appSharedPreference.getUserInfo();
     }
 
     private void initViews() {
@@ -51,20 +51,6 @@ public class ChangePasswordActivity extends BaseActivity {
         });
     }
 
-    private void fetchUserDetails() {
-        // TODO: 13-08-2022 make email to dynamic
-        showProgressDialog();
-        db.collection(USERS)
-                .document("urvishsabhaya@gmail.com")
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    currentUser = documentSnapshot.toObject(User.class);
-                    hideProgressDialog();
-                }).addOnFailureListener(e -> {
-                    hideProgressDialog();
-                });
-    }
-
     private void validateAndChangePass() {
         if (currentUser == null) {
             Toast.makeText(this, "Please Try Again", Toast.LENGTH_SHORT).show();
@@ -79,6 +65,10 @@ public class ChangePasswordActivity extends BaseActivity {
             Toast.makeText(this, "Please enter old password", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (!decodeBase64(currentUser.getUser_security()).equals(oldPass)) {
+            Toast.makeText(this, "Your old password is wrong", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (TextUtils.isEmpty(newPass)) {
             Toast.makeText(this, "Please enter new password", Toast.LENGTH_SHORT).show();
             return;
@@ -89,10 +79,6 @@ public class ChangePasswordActivity extends BaseActivity {
         }
         if (!newPass.equals(confirmPass)) {
             Toast.makeText(this, "New password and confirm password not matching", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!decodeBase64(currentUser.getUser_security()).equals(oldPass)) {
-            Toast.makeText(this, "Your old password is wrong", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -107,6 +93,7 @@ public class ChangePasswordActivity extends BaseActivity {
                 .update(USER_SECURITY, encoded)
                 .addOnSuccessListener(aVoid -> {
                     currentUser.setUser_security(encoded);
+                    appSharedPreference.setUserInfo(currentUser);
                     Toast.makeText(ChangePasswordActivity.this, "Your password has been changed successfully", Toast.LENGTH_SHORT).show();
                     hideProgressDialog();
                     edt_old_password.setText("");
