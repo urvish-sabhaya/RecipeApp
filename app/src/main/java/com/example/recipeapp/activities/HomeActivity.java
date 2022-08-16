@@ -56,7 +56,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     Dialog filterDialog;
     FloatingActionButton add_recipe_fab;
     EditText edt_search;
-    RecipeAdapter recipeAdapter;
     ArrayList<Integer> selectedCategoriesFilter = new ArrayList<>();
     TextWatcher textWatcher;
 
@@ -112,8 +111,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             no_recipes_txt.setVisibility(View.GONE);
             recycler_recipes.setVisibility(View.VISIBLE);
         }
-        recipeAdapter.setList(recipesList);
-        recipeAdapter.notifyDataSetChanged();
+
+        recycler_recipes.setAdapter(new RecipeAdapter(this, recipesList));
     }
 
     private void initViews() {
@@ -133,8 +132,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         edt_search = findViewById(R.id.edt_search);
 
         recycler_recipes.setLayoutManager(new LinearLayoutManager(this));
-        recipeAdapter = new RecipeAdapter(this);
-        recycler_recipes.setAdapter(recipeAdapter);
     }
 
     private void setClicks() {
