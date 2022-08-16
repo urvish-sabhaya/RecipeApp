@@ -11,4 +11,6 @@ public class FireStoreConstants {
     /*Fields*/
     public static String UPLOADED_BY_EMAIL = "uploaded_by_email";
     public static String USER_SECURITY = "user_security";
+    public static String USER_NAME = "user_name";
+    public static String USER_IMAGE = "user_image";
 }
