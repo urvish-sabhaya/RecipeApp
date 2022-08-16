@@ -23,11 +23,12 @@ import com.example.recipeapp.R;
 import com.example.recipeapp.models.User;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends BaseActivity {
 
@@ -36,7 +37,7 @@ public class ProfileActivity extends BaseActivity {
     RelativeLayout profile_image_rel;
     Button update_profile_btn;
     FirebaseFirestore db;
-    RoundedImageView profile_image;
+    CircleImageView profile_image;
     User user;
     Bitmap selectedProfileImage = null;
 

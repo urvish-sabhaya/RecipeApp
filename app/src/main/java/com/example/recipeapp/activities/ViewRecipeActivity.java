@@ -1,6 +1,7 @@
 package com.example.recipeapp.activities;
 
-import static com.example.recipeapp.utils.Constants.RECIPE_MODEL;
+import static com.example.recipeapp.utils.Constants.VIEW_RECIPE;
+import static com.example.recipeapp.utils.Constants.viewableRecipe;
 import static com.example.recipeapp.utils.FireStoreConstants.RECIPES;
 import static com.example.recipeapp.utils.FireStoreConstants.RECIPE_INGREDIENTS;
 import static com.example.recipeapp.utils.FireStoreConstants.RECIPE_STEPS;
@@ -53,10 +54,12 @@ public class ViewRecipeActivity extends BaseActivity {
         /*Initialised all used views in the screen*/
         initViews();
 
+        if (getIntent().getExtras() != null &&
+                getIntent().getExtras().containsKey(VIEW_RECIPE) &&
+                viewableRecipe != null) {
 
-        if (getIntent().getExtras().containsKey(RECIPE_MODEL)) {
-
-            Recipe recipe = (Recipe) getIntent().getSerializableExtra(RECIPE_MODEL);
+//            Recipe recipe = (Recipe) getIntent().getSerializableExtra(VIEW_RECIPE);
+            Recipe recipe = viewableRecipe;
 
             /*Bind all data with views*/
             bindData(recipe);

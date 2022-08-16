@@ -17,4 +17,5 @@
     <color name="chips_back">#faf5f1</color>
     <color name="chips_font">#353296</color>
     <color name="back_screen">#F4F4F4</color>
+    <color name="light_red">#FFC4C4</color>
 </resources>

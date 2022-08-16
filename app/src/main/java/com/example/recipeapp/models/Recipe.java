@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Recipe implements Serializable {
 
     String document_id, recipe_image, recipe_name, uploaded_by_name, uploaded_by_image, recipe_details,
-            recipe_difficulty, uploaded_by_email;
+            recipe_difficulty, uploaded_by_email, recipe_type;
 
-    int recipe_type, baking_time, cooking_time, resting_time, nutrition_calorie,
+    int baking_time, cooking_time, resting_time, nutrition_calorie,
             nutrition_carb, nutrition_fat, nutrition_protein;
 
     ArrayList<String> tags, utensils;
@@ -155,11 +155,11 @@ public class Recipe implements Serializable {
         this.uploaded_by_image = uploaded_by_image;
     }
 
-    public int getRecipe_type() {
+    public String getRecipe_type() {
         return recipe_type;
     }
 
-    public void setRecipe_type(int recipe_type) {
+    public void setRecipe_type(String recipe_type) {
         this.recipe_type = recipe_type;
     }
 

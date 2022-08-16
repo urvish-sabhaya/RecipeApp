@@ -2,24 +2,21 @@ package com.example.recipeapp.models;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.firestore.Exclude;
+
 public class RecipeType {
-    int recipe_id;
-    String recipe_name;
+    String recipe_name, document_id;
 
     public RecipeType() {
     }
 
-    public RecipeType(int recipe_id, String recipe_name) {
-        this.recipe_id = recipe_id;
-        this.recipe_name = recipe_name;
+    @Exclude
+    public String getDocument_id() {
+        return document_id;
     }
 
-    public int getRecipe_id() {
-        return recipe_id;
-    }
-
-    public void setRecipe_id(int recipe_id) {
-        this.recipe_id = recipe_id;
+    public void setDocument_id(String document_id) {
+        this.document_id = document_id;
     }
 
     public String getRecipe_name() {

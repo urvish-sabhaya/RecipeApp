@@ -38,19 +38,20 @@
 
     <RelativeLayout
         android:id="@+id/profile_image_rel"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_width="@dimen/_77sdp"
+        android:layout_height="@dimen/_77sdp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/_20sdp">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_70sdp"
             android:layout_alignParentBottom="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_user"
-            app:riv_corner_radius="@dimen/_8sdp" />
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="@dimen/_2sdp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

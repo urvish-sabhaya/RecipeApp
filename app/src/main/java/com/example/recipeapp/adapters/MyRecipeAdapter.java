@@ -1,7 +1,8 @@
 package com.example.recipeapp.adapters;
 
 import static com.example.recipeapp.utils.Constants.EDIT_RECIPE;
-import static com.example.recipeapp.utils.Constants.RECIPE_MODEL;
+import static com.example.recipeapp.utils.Constants.VIEW_RECIPE;
+import static com.example.recipeapp.utils.Constants.viewableRecipe;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +15,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.recipeapp.R;
 import com.example.recipeapp.activities.AddRecipeActivity;
 import com.example.recipeapp.activities.ViewRecipeActivity;
+import com.example.recipeapp.interfaces.DeleteRecipeInterface;
 import com.example.recipeapp.models.Recipe;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -29,10 +32,12 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ViewHo
 
     Context context;
     List<Recipe> recipeList;
+    DeleteRecipeInterface deleteRecipeInterface;
 
-    public MyRecipeAdapter(Context context, List<Recipe> recipeList) {
+    public MyRecipeAdapter(Context context, List<Recipe> recipeList, DeleteRecipeInterface deleteRecipeInterface) {
         this.context = context;
         this.recipeList = recipeList;
+        this.deleteRecipeInterface = deleteRecipeInterface;
     }
 
     @NonNull
@@ -53,15 +58,37 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ViewHo
         holder.txt_recipe_description.setText(recipe.getRecipe_details());
 
         holder.itemView.setOnClickListener(view -> {
+            viewableRecipe = recipe;
             Intent intent = new Intent(context, ViewRecipeActivity.class);
-            intent.putExtra(RECIPE_MODEL, recipe);
+            intent.putExtra(VIEW_RECIPE, "recipe");
             context.startActivity(intent);
         });
 
         holder.edit_rel.setOnClickListener(view -> {
             Intent intent = new Intent(context, AddRecipeActivity.class);
-            intent.putExtra(EDIT_RECIPE, recipe);
+            viewableRecipe = recipe;
+            intent.putExtra(EDIT_RECIPE, "recipe");
             context.startActivity(intent);
+        });
+
+        holder.delete_rel.setOnClickListener(view -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            builder.setTitle("Delete Recipe");
+            builder.setMessage("Are you sure you want to delete " + recipe.getRecipe_name() + "?");
+
+            builder.setPositiveButton("YES", (dialog, which) -> {
+                deleteRecipeInterface.deleteRecipe(recipe.getDocument_id(), position);
+                dialog.dismiss();
+            });
+
+            builder.setNegativeButton("NO", (dialog, which) -> {
+                dialog.dismiss();
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
         });
     }
 
@@ -74,7 +101,7 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ViewHo
 
         RoundedImageView img_recipe_image;
         TextView txt_recipe_description, txt_recipe_name;
-        RelativeLayout edit_rel;
+        RelativeLayout edit_rel, delete_rel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +110,7 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ViewHo
             txt_recipe_description = itemView.findViewById(R.id.txt_recipe_description);
             txt_recipe_name = itemView.findViewById(R.id.txt_recipe_name);
             edit_rel = itemView.findViewById(R.id.edit_rel);
+            delete_rel = itemView.findViewById(R.id.delete_rel);
         }
     }
 }

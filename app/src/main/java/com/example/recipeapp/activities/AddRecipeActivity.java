@@ -2,6 +2,7 @@ package com.example.recipeapp.activities;
 
 import static com.example.recipeapp.utils.Constants.EDIT_RECIPE;
 import static com.example.recipeapp.utils.Constants.recipesCategoryList;
+import static com.example.recipeapp.utils.Constants.viewableRecipe;
 import static com.example.recipeapp.utils.FireStoreConstants.RECIPES;
 import static com.example.recipeapp.utils.FireStoreConstants.RECIPE_INGREDIENTS;
 import static com.example.recipeapp.utils.FireStoreConstants.RECIPE_STEPS;
@@ -112,11 +113,13 @@ public class AddRecipeActivity extends BaseActivity {
 
     private void manageIntent() {
         if (getIntent().getExtras() != null &&
-                getIntent().getExtras().containsKey(EDIT_RECIPE)) {
+                getIntent().getExtras().containsKey(EDIT_RECIPE) &&
+                viewableRecipe != null) {
             isThisEdit = true;
             toolbar_title.setText("Edit Your Recipe");
 
-            Recipe recipe = (Recipe) getIntent().getSerializableExtra(EDIT_RECIPE);
+//            Recipe recipe = (Recipe) getIntent().getSerializableExtra(EDIT_RECIPE);
+            Recipe recipe = viewableRecipe;
 
             /*Bind all data with views*/
             bindData(recipe);
@@ -595,7 +598,9 @@ public class AddRecipeActivity extends BaseActivity {
             if (i == recipeStepsList.size() - 1) {
                 Toast.makeText(AddRecipeActivity.this, "Your recipe has been uploaded successfully", Toast.LENGTH_SHORT).show();
                 hideProgressDialog();
-                onBackPressed();
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }
@@ -669,7 +674,7 @@ public class AddRecipeActivity extends BaseActivity {
         recipe_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                recipe.setRecipe_type(recipesCategoryList.get(position).getRecipe_id());
+                recipe.setRecipe_type(recipesCategoryList.get(position).getDocument_id());
             }
 
             @Override

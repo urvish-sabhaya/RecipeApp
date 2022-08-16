@@ -1,5 +1,6 @@
 package com.example.recipeapp.utils;
 
+import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.models.RecipeType;
 
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ public class Constants {
     public static ArrayList<RecipeType> recipesCategoryList = new ArrayList<>();
 
     /*Intents*/
-    final public static String RECIPE_MODEL = "recipe_model";
+    final public static String VIEW_RECIPE = "view_recipe";
     final public static String EDIT_RECIPE = "edit_recipe";
+
+    /*Recipe*/
+    public static Recipe viewableRecipe;
 }
