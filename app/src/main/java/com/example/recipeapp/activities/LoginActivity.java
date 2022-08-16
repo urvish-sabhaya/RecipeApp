@@ -18,8 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LoginActivity extends BaseActivity {
 
     //Buttons Login and Signup
-    Button btnSignUp, btnUserLogin;
-    EditText userEmail, userPassword;
+    Button btnSignUp, login_btn;
+    EditText user_email_edt, user_password_edt;
     FirebaseFirestore db;
     TextView forgot_password_txt;
 
@@ -29,10 +29,10 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
 
         //Login buttons with id
-        btnUserLogin = findViewById(R.id.btnUserLogin);
+        login_btn = findViewById(R.id.login_btn);
         btnSignUp = findViewById(R.id.btnSignUp);
-        userEmail = findViewById(R.id.userEmail);
-        userPassword = findViewById(R.id.userPassword);
+        user_email_edt = findViewById(R.id.user_email_edt);
+        user_password_edt = findViewById(R.id.user_password_edt);
         forgot_password_txt = findViewById(R.id.forgot_password_txt);
         db = FirebaseFirestore.getInstance();
 
@@ -45,14 +45,13 @@ public class LoginActivity extends BaseActivity {
             startActivity(i);
         });
 
-        btnUserLogin.setOnClickListener(view -> {
-            if (TextUtils.isEmpty(userEmail.getText().toString())) {
-                userEmail.setError("Kindly enter a valid email address");
+        login_btn.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(user_email_edt.getText().toString())) {
+                user_email_edt.setError("Kindly enter a valid email address");
                 return;
             }
-            if (TextUtils.isEmpty(userPassword.getText().toString()) ||
-                    userPassword.getText().toString().length() <= 6) {
-                userPassword.setError("Fill at least 6 character");
+            if (TextUtils.isEmpty(user_password_edt.getText().toString())) {
+                user_password_edt.setError("Please enter your password");
                 return;
             }
 
@@ -64,8 +63,8 @@ public class LoginActivity extends BaseActivity {
         showProgressDialog();
 
         //Getting username from the text box and getting the document id from database
-        String userDoc = userEmail.getText().toString();
-        String checkUserPass = userPassword.getText().toString();
+        String userDoc = user_email_edt.getText().toString();
+        String checkUserPass = user_password_edt.getText().toString();
 
         //Setting document reference
         DocumentReference document = db.collection(USERS).document(userDoc);

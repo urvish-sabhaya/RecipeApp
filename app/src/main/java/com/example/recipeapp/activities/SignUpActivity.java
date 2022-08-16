@@ -1,6 +1,11 @@
 package com.example.recipeapp.activities;
 
+import static com.example.recipeapp.utils.FireStoreConstants.SECURITY_QUESTION;
+import static com.example.recipeapp.utils.FireStoreConstants.SECURITY_QUESTION_ANSWER;
 import static com.example.recipeapp.utils.FireStoreConstants.USERS;
+import static com.example.recipeapp.utils.FireStoreConstants.USER_EMAIL;
+import static com.example.recipeapp.utils.FireStoreConstants.USER_NAME;
+import static com.example.recipeapp.utils.FireStoreConstants.USER_SECURITY;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.recipeapp.R;
 import com.example.recipeapp.models.User;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -22,7 +28,7 @@ public class SignUpActivity extends BaseActivity {
 
     //Edit text fields
     EditText userName, userEmail, userPassword, securityQuestion, securityAnswer;
-    FirebaseFirestore dbroot;
+    FirebaseFirestore db;
     boolean isAllFieldsChecked = false;
 
     @Override
@@ -38,16 +44,16 @@ public class SignUpActivity extends BaseActivity {
         userPassword = findViewById(R.id.userPassword);
         securityQuestion = findViewById(R.id.securityQuestion);
         securityAnswer = findViewById(R.id.securityAnswer);
-        dbroot = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         btnSignUp.setOnClickListener(view -> {
-// store the returned value of the dedicated function which checks
+            // store the returned value of the dedicated function which checks
             // whether the entered data is valid or if any fields are left blank.
             isAllFieldsChecked = CheckAllFields();
             // the boolean variable turns to be true then
             // only the user must be proceed to the activity2
             if (isAllFieldsChecked) {
-                registerUser();
+                checkUserExist();
             }
         });
 
@@ -56,19 +62,43 @@ public class SignUpActivity extends BaseActivity {
         });
     }
 
+    public void checkUserExist() {
+        showProgressDialog();
+
+        String userID = userEmail.getText().toString();
+
+        //Setting document reference
+        DocumentReference document = db.collection(USERS).document(userID);
+        document.get().addOnSuccessListener(documentSnapshot -> {
+                    hideProgressDialog();
+
+                    if (documentSnapshot.exists()) {
+                        userEmail.setText("");
+                        Toast.makeText(getApplicationContext(), "User with " + userID + " already exist! Please user other email", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    registerUser();
+                })
+                .addOnFailureListener(e -> {
+                    hideProgressDialog();
+                    registerUser();
+                });
+    }
+
     public void registerUser() {
         showProgressDialog();
 
-        Map<String, String> items = new HashMap<>();
-        items.put("user_name", userName.getText().toString().trim());
-        items.put("user_email", userEmail.getText().toString().trim());
-        items.put("user_security", encodeBase64(userPassword.getText().toString()));
-        items.put("security_question", securityQuestion.getText().toString().trim());
-        items.put("security_question_answer", securityAnswer.getText().toString().trim());
-
         String userEmailAddress = userEmail.getText().toString();
 
-        dbroot.collection(USERS).document(userEmailAddress).set(items).addOnCompleteListener(task -> {
+        Map<String, String> items = new HashMap<>();
+        items.put(USER_NAME, userEmailAddress);
+        items.put(USER_EMAIL, userEmail.getText().toString());
+        items.put(USER_SECURITY, encodeBase64(userPassword.getText().toString()));
+        items.put(SECURITY_QUESTION, securityQuestion.getText().toString());
+        items.put(SECURITY_QUESTION_ANSWER, securityAnswer.getText().toString());
+
+        db.collection(USERS).document(userEmailAddress).set(items).addOnCompleteListener(task -> {
             hideProgressDialog();
 
             User currentUser = new User();
@@ -91,27 +121,25 @@ public class SignUpActivity extends BaseActivity {
 
     private boolean CheckAllFields() {
         if (userName.length() == 0) {
-            userName.setError("This Field is Required");
+            userName.setError("Full name is Required");
             return false;
         }
-        if (userEmail.length() == 0) {
-            userEmail.setError("Kindly enter a valid email address");
+        if (!isValidEmail(userEmail.getText().toString())) {
+            userEmail.setError("Please enter valid email address");
             return false;
         }
-        if (userPassword.length() == 0 || userPassword.length() <= 6) {
-            userPassword.setError("Fill atleast 6 character");
+        if (userPassword.length() == 0 || userPassword.length() < 6) {
+            userPassword.setError("Password should be at least 6 character");
             return false;
         }
         if (securityQuestion.length() == 0) {
-            securityQuestion.setError("This Field is Required");
+            securityQuestion.setError("Security question is Required");
             return false;
         }
         if (securityAnswer.length() == 0) {
-            securityAnswer.setError("This Field is Required");
+            securityAnswer.setError("Security question answer is Required");
             return false;
         }
         return true;
     }
-
-
 }

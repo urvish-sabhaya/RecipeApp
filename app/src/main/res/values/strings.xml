@@ -27,4 +27,10 @@
     <string name="email">Email</string>
     <string name="check_email">Check Email</string>
     <string name="email_attached_with_account">Email attached with account</string>
+    <string name="welcome_to_cookbook">Welcome To CookBook</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="signup">SignUp</string>
+    <string name="full_name">Full Name</string>
+    <string name="security_question_answer">Security Question Answer</string>
 </resources>
